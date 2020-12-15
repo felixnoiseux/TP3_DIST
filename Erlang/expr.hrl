@@ -1,0 +1,4 @@
+-record(expr, {
+    expr = "",
+    signification = ""
+}).
