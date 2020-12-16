@@ -7,11 +7,13 @@ sum(Func, Data, Acc) ->
     lists:foldr(Func, Acc, Data).
 
 ex1()->
+	%%Création de livres
 	L1 = #livre{isbn="9783425040639",titre="Letranger", auteur1="Albert", auteur2="", edition="Edition Christian",prix_achat=10.0, prix_vente=20.0, nombre_exemplaires_initial = 25, nombre_exemplaires_actuel=10 },
 	L2 = #livre{isbn="8883425040639",titre="La vie d'esclave au college", auteur1="Felix Noiseux", auteur2="Raphael Lapointe", edition="Beliveau Editeur",prix_achat=5.0, prix_vente=15.0, nombre_exemplaires_initial = 50, nombre_exemplaires_actuel=30 },
 	L3 = #livre{isbn="1243432459039",titre="Developpement Agile", auteur1="Stephane Denis", auteur2="Albert", edition="La courte echelle",prix_achat=20.0, prix_vente=35.0, nombre_exemplaires_initial = 10, nombre_exemplaires_actuel=1 },
 	L4 = #livre{isbn="0941731348877",titre="Apprendre Java", auteur1="Giovana", auteur2="", edition="Flammarion Quebec",prix_achat=2.0, prix_vente=5.0, nombre_exemplaires_initial = 20, nombre_exemplaires_actuel=17 },
 	L5 = #livre{isbn="4894794128472",titre="Lenigme de l'Atlantide", auteur1="Edouard Brassey", auteur2="", edition="Front Froid",prix_achat=1.0, prix_vente=2.0, nombre_exemplaires_initial = 1, nombre_exemplaires_actuel=1 },
+	%%Création de plusieurs listes concernant les informations demandés
 	LstLivres = [L1, L2, L3, L4, L5],
     LstLivresPlusCher = lists:sort(fun (A, B) -> A#livre.prix_vente >= B#livre.prix_vente end, LstLivres),
     LstLivresMoinsCher = lists:sort(fun (A, B) -> A#livre.prix_vente =< B#livre.prix_vente end, LstLivres),
@@ -22,6 +24,7 @@ ex1()->
 	LstLivresMeilleursProfits = lists:sort(fun (A, B) -> 
 	((A#livre.prix_vente - A#livre.prix_achat)*(A#livre.nombre_exemplaires_initial - A#livre.nombre_exemplaires_actuel)) >=
 	((B#livre.prix_vente - B#livre.prix_achat)*(B#livre.nombre_exemplaires_initial - B#livre.nombre_exemplaires_actuel))end, LstLivres),
+	%%Affichage des informations demandés
 	io:format("~n~n ==========TITRES DES LIVRES LES PLUS CHERS========== ~n~n"),
 	lists:foreach(fun(Y) -> erlang:display("Titre: " ++ Y#livre.titre ++ ", Prix: " ++ float_to_list(Y#livre.prix_vente, [{decimals, 2}]) ++ "$")end, LstLivresPlusCher),
 	timer:sleep(1000),
