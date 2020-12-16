@@ -1,3 +1,4 @@
+% Auteur: Félix Noiseux
 -module(exercice1).
 -import(lists, [max/1, sublist/2, sum/1]).
 -include("livre.hrl").
